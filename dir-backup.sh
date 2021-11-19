@@ -32,4 +32,4 @@ date=$(date +'%Y%m%d')
 timestamp=$(date +'%Y%m%d_%H%M%S')
 object="s3://${s3_bucket}/${hostname}/${date}/${timestamp}/"
 write_log "Uploading directory $dir"
-s3cmd --access_key=$s3_access_key --secret_key=$s3_secret_key -m binary/octet-stream sync ${dir}/ $object
+AWS_ACCESS_KEY_ID=$s3_access_key AWS_SECRET_ACCESS_KEY=$s3_secret_key aws s3 sync ${dir}/ $object --no-progress
